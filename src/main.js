@@ -1,27 +1,14 @@
-import './style.css';
+let price = 5;
+let quantity = 2;
+let total = 0;
 
-class MyClass {
+let dep = new Set();
+const effect = () => { total = price * quantity };
 
-    static staticLogger() {
-        console.log('static method');
-    }
-
-    constructor() {}
-
-    logger() {
-        console.log('logg');
-    }
-
-
+function track() {
+    dep.add(effect)
 }
 
-const stra = new MyClass()
-// const bla = Object.getPrototypeOf(stra);
-// const bla = Object.getPrototypeOf(stra).constructor;
-// console.log("bla", bla);
-// bla.logger();
-// bla.staticLogger();
-
-// kako da dohvatis prototip klase
-// kako da dohvatis nazad referencu same klase MyClass
-// sta je constructor klase
+function trigger() {
+    dep.forEach(effect => effect())
+}
