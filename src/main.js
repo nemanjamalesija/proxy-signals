@@ -34,7 +34,6 @@ function trigger(target, key) {
 
     let dep = depsMap.get(key);
 
-    console.log("depsMap is", depsMap);
 
     if (dep) {
         console.log("triggering for dep:", dep);
