@@ -17,7 +17,6 @@ function track(target, key) {
 
     if (!depsMap) {
         targetMap.set(target, (depsMap = new Map()))
-        // console.log("target map is ", targetMap.get(target));
     }
 
     let dep = depsMap.get(key)
@@ -26,7 +25,6 @@ function track(target, key) {
         depsMap.set(key, (dep = new Set()));
     }
 
-console.log("adding active effect", activeEffect);
     dep.add(activeEffect);
 }
 
@@ -35,7 +33,6 @@ function trigger(target, key) {
     if (!depsMap) return
 
     let dep = depsMap.get(key);
-    // console.log("depsMap is:", depsMap);
 
     console.log("depsMap is", depsMap);
 
@@ -53,7 +50,6 @@ function reactive(target) {
             return result;
         },
         set(target, key, value, reciever) {
-            console.log("value chanfed for key " + key, ' and its value: '+  value);
             const oldValue = target[key];
             const result = Reflect.set(target, key, value, reciever)
             if (result && oldValue != value) {
@@ -91,25 +87,3 @@ function computed(getter){
 
 const product = reactive({ price: 5, quantity: 2 })
 let total = computed(() => product.price * product.quantity)
-product.price = 10;
-console.log("total", total.value);
-// effect(() => { total = product.price * product.quantity })
-
-// product.price = 10
-
-
-
-// const obj = {
-//     _value: 1,
-//     get value(){
-//         return this._value
-//     },
-//     set value(val){
-//         this._value = val
-//     }
-// }
-
-
-// console.log(obj.value); // Logs: this obj, getting value, and returns 1
-// obj.value = 42; // Logs: this obj, setting value 42
-// console.log(obj.value);
