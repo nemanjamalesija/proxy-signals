@@ -36,7 +36,6 @@ function trigger(target, key) {
 
 
     if (dep) {
-        console.log("triggering for dep:", dep);
         dep.forEach(effect => effect())
     }
 }
